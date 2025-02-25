@@ -12,7 +12,7 @@ resource "random_pet" "prefix" {
 }
 
 resource "azurerm_storage_account" "st01" {
-  name                     = "momoratst01"
+  name                     = replace("${random_pet.prefix.id}st01", "-", "")
   resource_group_name      = azurerm_resource_group.rg.name
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
@@ -60,10 +60,11 @@ resource "azurerm_databricks_access_connector" "auth" {
   }
 }
 
+# Need to manually assign Owner role to existing Service Principal at RG level for the sp to change role assignment
+
 # Assign Storage Blob Data Contributor role to the Access Connector
 resource "azurerm_role_assignment" "storage_contributor" {
   scope                = azurerm_storage_account.st01.id
   role_definition_name = "Storage Blob Data Contributor"
   principal_id         = azurerm_databricks_access_connector.auth.identity[0].principal_id
 }
-
