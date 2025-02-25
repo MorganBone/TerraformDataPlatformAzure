@@ -43,9 +43,11 @@ Resources follow a consistent naming pattern using a random pet name with prefix
 - Azure CLI installed and authenticated
 - Create Service principal or equivalent
 - Connect to Azure CLI wit az login
+  For this exercise I have created an admin user and connected with this user
+
 for instance
 ```bash
-az login --service-principal -u "f129b20f-52e7-4df2-8aa3-ee6acb169f28" -p "WRI8Q~gux8unGcToFs0Swlmp2V8Skv_Jyj54VcSA" --tenant "3234036a-a7df-4ba8-92a0-d33f7bb6fa04"
+az login --service-principal -u "SPN APP ID" -p "SPN Password" --tenant "Tenant ID"
 ```
 
 ## Usage
