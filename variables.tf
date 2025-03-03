@@ -20,16 +20,12 @@ variable "environments" {
   description = "Environment name for resource deployment (e.g., dev, test, preprod, prod)"
   type        = string
   default     = "dev"
-#  type        = list(string)
-#  default     = ["dev", "test", "preprod", "prod"]
 }
 
 variable "datasource" {
   description = "Source system identifier for data ingestion"  
-  # type        = string
-  # default     = "ln7"
   type        = list(string)
-  default     = ["ln7", "ln107", "mes", "sf", "agile", "bc"]
+  default     = ["ln7", "ln107"]
 }
 
 variable "storage_containers" {
