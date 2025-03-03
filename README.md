@@ -2,6 +2,7 @@
 
 This repository contains Terraform configurations for deploying a modern data platform on Azure, featuring Databricks and Data Lake Storage.
 
+
 ## Architecture
 
 The infrastructure consists of:
@@ -67,6 +68,18 @@ terraform plan
 terraform apply
 ```
 
+## Opened Questions
+
+1) storage_account_replication: 
+  - LRS (Locally Redundant Storage)
+  - ZRS (Zone-Redundant Storage) ***
+  - GRS (Geo-Redundant Storage)
+  - GZRS (Geo-Zone-Redundant Storage)
+  - RAGZRS (Read Access Geo-Zone-Redundant Storage)
+  - RAGRS (Read Access Geo-Redundant Storage)
+  
+  doc: https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy
+
 ## Contributing
 
 Please follow the standard Git workflow:
@@ -77,3 +90,6 @@ Please follow the standard Git workflow:
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Documentation
+Terraform registry (Azure): https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs

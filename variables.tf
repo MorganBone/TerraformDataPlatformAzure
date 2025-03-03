@@ -1,4 +1,3 @@
-
 variable "location" {
   description = "The Azure region where resources will be created"
   type        = string
@@ -30,19 +29,7 @@ variable "datasource" {
   # type        = string
   # default     = "ln7"
   type        = list(string)
-  default     = ["ln7", "ln107", "mes", "sf",]
-}
-
-variable "storage_account_tier" {
-  description = "Performance tier for the storage account (Standard or Premium)"
-  type        = string
-  default     = "Standard"
-}
-
-variable "storage_account_replication" {
-  description = "Data replication strategy for the storage account (LRS, GRS, etc.)"
-  type        = string
-  default     = "GRS"
+  default     = ["ln7", "ln107", "mes", "sf", "agile", "bc"]
 }
 
 variable "storage_containers" {
@@ -51,8 +38,14 @@ variable "storage_containers" {
   default     = ["data", "metadata", "logs"]
 }
 
-variable "min_tls_version" {
-  description = "Minimum TLS version required for the storage account"
+variable "entra_groups" {
+  description = "List of Entra ID group roles to create"
+  type        = list(string)
+  default     = ["dev", "users", "admin", "support"]
+}
+
+variable "entra_groups_prefix_name" {
+  description = "Prefix for project Entra Groups"
   type        = string
-  default     = "TLS1_2"
+  default     = "WSA-EntraGRP-BI-"
 }
