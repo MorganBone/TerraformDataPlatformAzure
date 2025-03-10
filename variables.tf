@@ -58,6 +58,24 @@ variable "project_admins_userslist" {
   default     = ["morgan@bonemorgangmail.onmicrosoft.com"]
 }
 
+variable "project_support_userslist" {
+  description = "List of Entra ID group roles to create"
+  type        = list(string)
+  default     = ["morgan@bonemorgangmail.onmicrosoft.com"]
+}
+
+variable "project_users_userslist" {
+  description = "List of Entra ID group roles to create"
+  type        = list(string)
+  default     = ["morgan@bonemorgangmail.onmicrosoft.com"]
+}
+
+variable "project_devs_userslist" {
+  description = "List of Entra ID group roles to create"
+  type        = list(string)
+  default     = ["morgan@bonemorgangmail.onmicrosoft.com"]
+}
+
 # #############################
 # Tagging variables 
 # #############################

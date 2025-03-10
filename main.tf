@@ -200,7 +200,7 @@ resource "azurerm_role_assignment" "storage_contributor" {
 # ENTRA Architecture
 # #####################################################################
 
-# Create admin group first
+# Create admin group
 resource "azuread_group" "admins_project_group" {
   # NOTE: Changing the following options will force recreation of the group:
   # - display_name
@@ -226,3 +226,90 @@ resource "azuread_group_member" "project_admins" {
   group_object_id  = replace(azuread_group.admins_project_group.id, "//groups//", "")
   member_object_id = replace(data.azuread_user.project_admins[each.key].id, "//users//", "")
 }
+
+
+# Create support group
+resource "azuread_group" "support_project_group" {
+  # NOTE: Changing the following options will force recreation of the group:
+  # - display_name
+  display_name     = "${var.entra_groups_prefix_name}-${var.project_name}-${var.environments}-support"
+  security_enabled = true
+  description      = "support access group in ${var.environments} environment of ${var.project_name} project"
+
+  owners = [
+    data.azuread_client_config.current.object_id
+  ]
+}
+
+# Look up project admin users by their email addresses
+data "azuread_user" "project_support" {
+  for_each            = toset(var.project_support_userslist)
+  user_principal_name = each.value
+}
+
+# Add project support to the support group
+resource "azuread_group_member" "project_support" {
+  for_each         = toset(var.project_support_userslist)
+  # It expects group id without /groups/ prefix 
+  group_object_id  = replace(azuread_group.support_project_group.id, "//groups//", "")
+  member_object_id = replace(data.azuread_user.project_support[each.key].id, "//users//", "")
+}
+
+
+# Create devs group
+resource "azuread_group" "devs_project_group" {
+  # NOTE: Changing the following options will force recreation of the group:
+  # - display_name
+  display_name     = "${var.entra_groups_prefix_name}-${var.project_name}-${var.environments}-devs"
+  security_enabled = true
+  description      = "Devs access group in ${var.environments} environment of ${var.project_name} project"
+
+  owners = [
+    data.azuread_client_config.current.object_id
+  ]
+}
+
+# Look up project admin users by their email addresses
+data "azuread_user" "project_devs" {
+  for_each            = toset(var.project_devs_userslist)
+  user_principal_name = each.value
+}
+
+# Add project devs to the devs group
+resource "azuread_group_member" "project_devs" {
+  for_each         = toset(var.project_devs_userslist)
+  # It expects group id without /groups/ prefix 
+  group_object_id  = replace(azuread_group.devs_project_group.id, "//groups//", "")
+  member_object_id = replace(data.azuread_user.project_devs[each.key].id, "//users//", "")
+}
+
+
+
+
+# Create users group
+resource "azuread_group" "users_project_group" {
+  # NOTE: Changing the following options will force recreation of the group:
+  # - display_name
+  display_name     = "${var.entra_groups_prefix_name}-${var.project_name}-${var.environments}-users"
+  security_enabled = true
+  description      = "Users access group in ${var.environments} environment of ${var.project_name} project"
+
+  owners = [
+    data.azuread_client_config.current.object_id
+  ]
+}
+
+# Look up project admin users by their email addresses
+data "azuread_user" "project_users" {
+  for_each            = toset(var.project_users_userslist)
+  user_principal_name = each.value
+}
+
+# Add project users to the users group
+resource "azuread_group_member" "project_users" {
+  for_each         = toset(var.project_users_userslist)
+  # It expects group id without /groups/ prefix 
+  group_object_id  = replace(azuread_group.users_project_group.id, "//groups//", "")
+  member_object_id = replace(data.azuread_user.project_users[each.key].id, "//users//", "")
+}
+
