@@ -2,6 +2,15 @@
 
 This repository contains Terraform configurations for deploying a modern data platform on Azure, featuring Databricks and Data Lake Storage.
 
+## TODO
+
+1- Create environments (DEV-QA-PROD) --> https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450
+2- Review Architecture to be modular -> compute/network/storage/...
+3- High availablilty duplicate in 2 Availablity Zones
+4- Review storage security public_network_access_enabled --> False
+5- Review network
+  5.1- DNS or Load balancer for storage ?
+  5.2- VNETs
 
 ## Architecture
 
@@ -10,63 +19,6 @@ The infrastructure consists of:
 - Azure Data Lake Storage Gen2 (Premium Storage Account)
 - Azure Databricks Workspace (Premium SKU)
 - Databricks Access Connector with managed identity
-
-## Storage Layout
-
-The storage account `momoratst01` contains three containers:
-- `data`: Primary container for raw and processed data
-- `metadata`: Container for metadata storage
-- `history`: Container for historical data and audit logs
-
-## Security Features
-
-- Storage Account:
-  - TLS 1.2 enforced
-  - Hierarchical Namespace enabled
-  - Private access for all containers
-  
-- Databricks:
-  - Premium workspace with enhanced security features
-  - Managed Identity authentication via Access Connector
-  - RBAC integration with Storage Blob Data Contributor role
-
-## Resource Naming
-
-Resources follow a consistent naming pattern using a random pet name with prefix "momo":
-- Resource Group: `<random-pet>-rg`
-- Databricks Workspace: `<random-pet>-databricks`
-- Access Connector: `<random-pet>-databricks-auth`
-
-## Prerequisites
-
-- Azure subscription
-- Terraform installed
-- Azure CLI installed and authenticated
-- Create Service principal or equivalent
-- Connect to Azure CLI wit az login
-  For this exercise I have created an admin user and connected with this user
-
-for instance
-```bash
-az login --service-principal -u "SPN APP ID" -p "SPN Password" --tenant "Tenant ID"
-```
-
-## Usage
-
-1. Initialize Terraform:
-```bash
-terraform init
-```
-
-2. Review the deployment plan:
-```bash
-terraform plan
-```
-
-3. Apply the configuration:
-```bash
-terraform apply
-```
 
 ## Opened Questions
 
@@ -79,17 +31,6 @@ terraform apply
   - RAGRS (Read Access Geo-Redundant Storage)
   
   doc: https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy
-
-## Contributing
-
-Please follow the standard Git workflow:
-1. Create a feature branch
-2. Make your changes
-3. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Documentation
 Terraform registry (Azure): https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
