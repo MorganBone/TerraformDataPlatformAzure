@@ -8,7 +8,7 @@ jobs:
       actions: read
       contents: read
       security-events: write
-    uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
+    uses: MorganBone/TerraformDataPlatformAzure/.github/workflows/az_tf_plan.yml@master
     with:
       path: modules/global                ## Path to terraform root module (Required)
       tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
