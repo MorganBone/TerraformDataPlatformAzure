@@ -1,0 +1,26 @@
+location             = "northeurope"
+location_shortname   = "ne"
+project_name         = "datastrategy"
+project_name_shortname = "ds"
+environments         = "dev"
+datasource          = ["ln7", "ln107"]
+storage_containers  = ["data","metadata","logs"]
+entra_groups_prefix_name = "WSA-EntraGRP-BI-"
+entra_groups        = ["devs", "users", "admins", "support"]
+project_admins_userslist = ["morgan@bonemorgangmail.onmicrosoft.com"]
+project_support_userslist = ["morgan@bonemorgangmail.onmicrosoft.com"]
+project_users_userslist = ["morgan@bonemorgangmail.onmicrosoft.com"]
+project_devs_userslist = ["morgan@bonemorgangmail.onmicrosoft.com"]
+
+# WSA Tagging
+WSA-Environment     = "NonProd"
+WSA-PrimaryOwner    = ""
+WSA-SecondaryOwner  = ""
+WSA-ProductName     = "BI-DataStrategy"
+WSA-CostCenterName  = "IT"
+WSA-CostCenterCode  = "2382"
+WSA-Description     = "BI Data Strategy"
+WSA-IT-ServiceOwner = "BI Team"
+WSA-IT-Environment  = "DEV"
+WSA-IT-Service      = "BI Data Strategy"
+WSA-IT-ProjectName  = "Data Strategy"
